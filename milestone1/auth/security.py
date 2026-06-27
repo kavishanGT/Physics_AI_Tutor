@@ -22,6 +22,11 @@ pwd_context = CryptContext(
 )
 
 def hash_password(password: str):
+    
+    print("PASSWORD:", password)
+    print("TYPE:", type(password))
+    print("LENGTH:", len(password))
+
     return pwd_context.hash(password)
 
 def verify_password(password: str, hashed_password: str):
