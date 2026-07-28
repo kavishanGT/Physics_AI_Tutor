@@ -26,9 +26,14 @@ app.add_middleware(
 # REQUEST MODEL
 # =========================
 
-class QuestionRequest(BaseModel):
+class ConversationMessage(BaseModel):
+    role: str
+    content: str
 
+
+class QuestionRequest(BaseModel):
     question: str
+    history: list[ConversationMessage] = []
 
 
 # =========================
@@ -55,7 +60,8 @@ def root():
 def ask_question(req: QuestionRequest):
 
     answer = ask_physics_question(
-        req.question
+        req.question,
+        req.history
     )
 
     return {
